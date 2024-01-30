@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>GAME</title>
+</head>
+
+<body>
+    <button class="btn1"></button>
+    <button class="btn2"></button>
+    <button class="btn3"></button>
+
+    <script>
+        $(document).ready(function randomnumber() {
+            let btn1 = $(".btn1")
+            btn1.html("Rock")
+            btn1.css({ "padding": "10px", "backgroundColor": "pink", "cursor": "pointer" })
+            let btn2 = $(".btn2")
+            btn2.html("Paper")
+            btn2.css({ "padding": "10px", "backgroundColor": "skyblue", "cursor": "pointer" })
+            let btn3 = $(".btn3")
+            btn3.html("Scissor")
+            btn3.css({ "padding": "10px", "backgroundColor": "lightgreen", "cursor": "pointer" })
+            let game = ["Rock", "Paper", "Scissor"]
+            let player
+            let number = Math.floor(Math.random() * game.length)
+            let element = game[number]
+            
+            $(".btn1").click(function () {
+                player = "Rock"
+                if (player == "Rock" && element == "Scissor") {
+                    alert("Rock Win")
+                }
+                else if (player == "Rock" && element == "Paper"){
+                    alert("Rock Lose")
+                }
+                else {
+                    alert("Match drawn")
+                }
+            })
+            $(".btn2").click(function () {
+                player = "Paper"
+                if (player == "Paper" && element == "Rock") {
+                    alert("Paper Win")
+                }
+                else if (player == "Paper" && element == "Scissor"){
+                    alert("Paper Lose")
+                }
+                else {
+                    alert("Match drawn")
+                }
+            })
+            $(".btn3").click(function () {
+                player = "Scissor"
+                if (player == "Scissor" && element == "Paper") {
+                    alert("Scissor Win")
+                }
+                else if (player == "Scissor" && element == "Rock"){
+                    alert("Scissor Lose")
+                }
+                else {
+                    alert("Match drawn")
+                }
+            })
+        })
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>WEEKLY BUDGET</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .main {
+            height: 100vh;
+            width: 100%;
+            background-color: rgb(238, 243, 241);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box1 {
+            height: max-content;
+            width: 700px;
+            border: 2px solid #ec0c0c;
+            padding: 30px;
+        }
+
+        .bx1 {
+            height: 60px;
+            width: 100%;
+            /* border: 2px solid #09a123; */
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            /* display: ; */
+        }
+
+        .input {
+            width: 70%;
+            margin-top: 1;
+            text-align: center;
+        }
+
+        .button {
+            width: 20%;
+            background-color: #818080;
+            color: white;
+        }
+
+        .box2 {
+            height: max-content;
+            width: 47%;
+            margin-top: 20px;
+            display: inline-block;
+            /* border: 2px solid #000; */
+        }
+
+        .text {
+            font-weight: 800;
+            margin-top: 20px;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .input1,
+        .input2 {
+            width: 100%;
+            height: 40px;
+            cursor: not-allowed;
+        }
+
+        .button1 {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        .box3 {
+            height: max-content;
+            width: 47%;
+            display: inline-block;
+            margin-top: 20px;
+            /* border: 2px solid #000; */
+            vertical-align: top;
+            margin-left: 30px;
+        }
+
+        .heading1 {
+            background-color: #98fca9;
+            padding: 5px;
+        }
+
+        .heading2 {
+            margin-top: 30px;
+            background-color: #8e7bf9;
+            padding: 5px;
+
+        }
+
+        .list {
+            height: max-content;
+            margin-top: 30px;
+            border: 1px solid #3109d3;
+        }
+
+        .add {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            height: 40px;
+            padding: 10px;
+            border: 1px solid #818080;
+        }
+
+        .add1 {
+            width: 80%;
+            font-size: 20px;
+        }
+
+        .add2 {
+            padding: 7px 20px;
+            border-radius: 10px;
+            background-color: grey;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>MY WEEKLY BUDGET</h1>
+        <div class="box1">
+            <div class="bx1">
+                <input class="input" id="input" type="number" placeholder="Enter Weekly Budget Amount">
+                <button class="button">Enter</button>
+            </div>
+            <div class="box2">
+                <p class="text">Add your daily expenses</p>
+                <p>Name</p>
+                <input class="input1" id="input1" type="text" disabled>
+                <p>Amount</p>
+                <input class="input2" type="number" id="input2" disabled>
+                <button class="button1">Add</button>
+                <p class="text1"></p>
+            </div>
+            <div class="box3">
+                <h2 class="heading1">Budget: <span class="budget"></span></h2>
+                <h2 class="heading2">Left: <span class="left"></span></h2>
+                <p class="text">My Expenses:</p>
+                <ul class="list"></ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+           $(".input").focus()
+           $(".button").click(function (){
+            if($(".input").val() != ""  ){
+                $(".bx1").hide()
+                $(".budget").text($(".input").val())
+                $(".left").text($(".input").val())
+                $(".input1").focus().prop("disabled", false).css({"cursor": "text"})
+                $(".input2").prop("disabled", false).css({"cursor": "text"})}
+                else{
+                    alert("First Enter Weekly Budget Value")
+                }
+            })
+            $(".button1").click(function () {
+            let li = $("<li>").addClass("add")
+            $(".list").append(li)
+            let bx2 = $("<div>").addClass("add1").text($(".input1").val())
+            li.append(bx2)
+            let bx3 = $("<div>").addClass("add2").text($(".input2").val())
+            li.append(bx3)
+            $(".input1" , "input2").val("")
+            let leftvalue = Number($(".left").text()) - ($(".input2").val())
+            $(".left").text(leftvalue)
+            if (leftvalue <= 0) {
+                $(".text1").text("You have used up entire budget for the week") 
+                $(".input1, .input2").prop("disabled", true)
+            }
+        })
+        })
+    </script>
+    
+</body>
+</html>

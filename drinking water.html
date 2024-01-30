@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>DRINKING WATER Jquery</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            padding: 30px;
+            height: 100vh;
+            width: 100%;
+            background-color: skyblue;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .div{
+            background-color: #fff;
+            border: 4px solid blue;
+            border-radius: 0 0 40px 40px;
+            height: 330px;
+            width: 170px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .remained{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            
+        }
+        .percentage{
+            height: 0;
+            width: 100%;
+            background-color: rgb(6, 51, 92);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .div1{
+            width: 530px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .glass{
+            height: 90px;
+            width: 51px;
+            color: blue;
+            border: 3px solid #2e14c2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .clr{
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>DRINK WATER</h1>
+        <p>Goals: 2 liters</p>
+        <div class="div">
+            <div class="remained">
+                <p class="liters"></p>
+            </div>
+            <div class="percentage"></div>
+        </div>
+        <p>Select how many glasses of water that you have drink</p>
+        <div class="div1">
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+            <div class="glass">250 ml</div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            let glasses = $(".glass")
+
+            glasses.each(function (idx, ele) {
+                $(ele).click(function() {
+                    highlightCup(idx);
+                });
+            });
+
+            function highlightCup(idx) {
+                if (idx === 7 && glasses.eq(idx).hasClass("clr")) idx--;
+                else if (glasses.eq(idx).hasClass("clr") && !glasses.eq(idx).next().hasClass("clr")){idx--};
+
+                glasses.each(function (indx, element) {
+                    if (indx <= idx) {
+                        $(element).addClass("clr");
+                    } else {
+                        $(element).removeClass("clr");
+                    }
+                });
+                bigGlass();
+            }
+            function bigGlass() {
+                let filledGlass = $(".clr").length;
+
+                if (filledGlass !== 0) {
+                    $(".percentage").css({"visibility": "visible", "height" : `${(filledGlass / glasses.length) * 330}px`});
+                    $(".percentage").text(`${(filledGlass / glasses.length) * 100}%`);
+                }
+                else if (filledGlass === glasses.length) {
+                    $(".remained").css({"visibility": "hidden","height": "0px" });
+                } else {
+                    $(".remained").css("visibility", "visible");
+                    $(".liters").text(`${2 - 0.25 * filledGlass}L`);
+                }
+            }
+
+            let idx = 0;
+            glasses.each(function (indx, e) {
+                $(e).click(function() {
+                    if ($(e).hasClass("clr")) {
+                        $(e).addClass("clr");
+                    } else {
+                        $(e).removeClass("clr");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

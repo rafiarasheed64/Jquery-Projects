@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <title>FORM VALIDATION JQUERY</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .main{
+            height: 100vh;
+            width: 100%;
+            background-color: skyblue;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box{
+            height: max-content;
+            width: max-content;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            border: 1px solid #000;
+            padding: 20px;
+        }
+        h1{
+            color: white;
+        }
+        .tablerow{
+            display: flex;
+            padding: 10px;
+        }
+        p{
+            border: 1px solid #000;
+            height: 50px;
+            width: 170px;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        div{
+            border: 1px solid #000;
+            height: 50px;
+            width: 230px;
+            padding: 10px;
+        }
+        input{
+            font-size: 16px;
+            padding: 5px;
+        }
+        select{
+            padding: 5px;
+        }
+        button{
+            padding:15px 35px ;
+            margin-left: 30%;
+            font-size: 18px;
+        }
+        .msg{
+            border: none;
+            width: max-content;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="box">
+            <h1>REGISTRATION FORM</h1>
+            <form >
+                <table>
+                    <tr class="tablerow">
+                        <td>
+                            <p>Enter Name</p>
+                        </td>
+                        <td>
+                            <div>
+
+                                <input type="text" id="textinp" name="Namee" autocomplete="additional-name">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td>
+                            <p>Enter Email</p>
+                        </td>
+                        <td>
+                            <div>
+
+                                <input type="email" id="emailinp" name="Emaill" autocomplete="address-level1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td>
+                            <p>Phone Number</p>
+                        </td>
+                        <td>
+                            <div>
+
+                                <input type="number" id="numberinp" name="Number" autocomplete="address-level1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="tablerow">
+                        <td>
+                            <p>Subject</p>
+                        </td>
+                        <td>
+                            <div>
+                                <select name="select" id="select">
+                                    <option value="0">Select</option>
+                                    <option value="1">Physics</option>
+                                    <option value="2">Biology</option>
+                                    <option value="3">Math</option>
+                                    <option value="4">Chemistry</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <button>SUBMIT</button>
+                <p class="msg"></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        
+        $(document).ready(function(){
+            let textinp = $("#textinp")
+            let emailinp = $("#emailinp")
+            let numberinp = $("#numberinp")
+            let select = $("#select")
+            let msg = $(".msg")
+            $("form").submit(function () {
+                if(textinp.val() == ""){
+                    msg.text("Enter Name")
+                    return false
+                } 
+                if(emailinp.val() == ""){
+                    msg.text("Enter Email")
+                    return false
+                }                
+                let email = emailinp.val()
+                let attherate = email.lastIndexOf("@")
+                let dot = email.lastIndexOf(".")
+                if (attherate < 1 || ( dot - attherate < 2 )) {
+                msg.text("Enter valid email ")
+                return false;
+            }
+            let ContactNumber = numberinp.val()
+            if(ContactNumber == "" || isNaN(ContactNumber ) || ContactNumber.length != 11 ){
+                msg.text("Enter Valid Phone Number")
+                return false
+            }
+            if(select.val() == "0"){
+                msg.innerHTML= "Enter Select"
+                return false
+            }
+            return true
+        })
+    })
+    
+        
+        
+    </script>
+    
+</body>
+</html>
